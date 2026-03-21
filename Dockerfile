@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     jq \
     openssh-client \
+    tmux \
     && mkdir -p -m 0755 /etc/apt/keyrings \
     && curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | gpg --dearmor -o /etc/apt/keyrings/githubcli-archive-keyring.gpg \
     && chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
@@ -39,7 +40,6 @@ WORKDIR /project
 #   -v /host/.claude:/root/.claude
 #   -e ANTHROPIC_API_KEY=...
 #
-# Keep container alive so you can exec into it or attach a shell.
-CMD ["sleep", "infinity"]
-
-exec tmux new-session -s claude "claude --dangerously-skip-permissions"
+# Starts Claude Code in a named tmux session. Attach with:
+#   docker exec -it <container> tmux attach -t claude
+CMD ["tmux", "new-session", "-s", "claude", "claude --dangerously-skip-permissions"]
