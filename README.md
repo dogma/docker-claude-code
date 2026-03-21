@@ -31,6 +31,28 @@ docker build -t claude-docker .
 
 ---
 
+## Publishing to ghcr.io
+
+`publish.sh` builds the image and pushes it to `ghcr.io/dogma/docker-claude-code`.
+
+**Requires:** `gh` CLI authenticated (`gh auth login`) and Docker running.
+
+```bash
+# Push as 'latest'
+./publish.sh
+
+# Push a specific version (also tags as 'latest')
+./publish.sh 1.2.3
+```
+
+To pull the published image on another host:
+
+```bash
+docker pull ghcr.io/dogma/docker-claude-code:latest
+```
+
+---
+
 ## Usage
 
 ### Option A — Docker Compose (recommended)
