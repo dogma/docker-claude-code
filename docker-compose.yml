@@ -1,0 +1,31 @@
+services:
+  claude-code:
+    build: .
+    image: claude-docker
+    stdin_open: true
+    tty: true
+
+    volumes:
+      # Your project — edit this path to point at your host project directory
+      - /path/to/your/project:/project
+
+      # Claude config and auth — mount from host, never bake into image
+      # This directory contains your API credentials and Claude settings
+      - /path/to/your/.claude:/root/.claude
+
+      # Optional: mount SSH keys for git over SSH
+      # - /path/to/your/.ssh:/root/.ssh:ro
+
+    environment:
+      # Option A: pass API key directly as an env var
+      # Uncomment and set, or export ANTHROPIC_API_KEY on the host before running
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+
+      # Option B: use credentials stored in the mounted .claude directory
+      # (no env var needed if .claude contains valid credentials)
+
+    # Keep the container alive — shell in with:
+    #   docker compose exec claude-code bash
+    # Then run:
+    #   claude
+    command: sleep infinity

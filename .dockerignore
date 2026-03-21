@@ -1,4 +1,24 @@
 
+# Dependencies
 node_modules
+
+# Git history (not needed in image)
 .git
+
+# Never bake in secrets or credentials
 .env
+.env.*
+*.env
+
+# Claude auth/config — must be mounted at runtime, never copied
+.claude
+.anthropic
+
+# SSH keys
+.ssh
+*.pem
+*.key
+
+# OS artifacts
+.DS_Store
+Thumbs.db
