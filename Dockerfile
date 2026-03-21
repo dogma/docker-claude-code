@@ -41,3 +41,5 @@ WORKDIR /project
 #
 # Keep container alive so you can exec into it or attach a shell.
 CMD ["sleep", "infinity"]
+
+exec tmux new-session -s claude "claude --dangerously-skip-permissions"
